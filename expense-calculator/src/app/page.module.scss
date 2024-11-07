@@ -1,0 +1,56 @@
+@import '../style/variables.scss';
+
+.layout {
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+ background: var($background-color);
+ @media (min-width: $M) {
+  gap: 32px;
+ }
+ @media (min-width: $XL) {
+  gap: 40px;
+ }
+}
+
+.main {
+ margin: 0 16px 0 16px;
+ min-height: 100vh;
+ height: 100%;
+}
+
+.footer {
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: center;
+ background: black;
+ height: 50px;
+ padding: 8px 8px;
+}
+
+.link {
+ color: white;
+ text-decoration: none;
+ cursor: pointer;
+  &:hover {
+   opacity: 0.9;
+ }
+}
+
+.fixedButton {
+ position: fixed;
+ bottom: 20px;
+ right: 20px;
+ padding: 10px 20px;
+ background-color: $accent-blue;
+ color: $card-background-color;
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 16px;
+ z-index: 1001;
+}
+
+.fixedButton:hover {
+ background-color: darken($accent-blue, 10%);
+}

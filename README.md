@@ -1,2 +1,0 @@
-# expense-calculator
-budget calculator
