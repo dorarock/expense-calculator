@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 import { expenseStore } from "../../stores/ExpenseStore";
 import { generateMockExpenses } from "../../stores/mockData";
 import styles from './ExpenseList.module.scss';
-import Filter from "../Filter/Filter";
 import PieChart from "../PieChart/PieChart";
 import {categoryDetails} from "../../stores/categories";
 
@@ -27,14 +26,12 @@ const ExpenseList: React.FC = observer(() => {
 
   const handleSort = (column: SortColumn) => {
     if (sortColumn === column) {
-      // Если уже отсортировано по этому столбцу, меняем порядок
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
-      // Ставим новый столбец для сортировки
       setSortColumn(column);
       setSortOrder('asc');
     }
-    expenseStore.sortExpenses(column, sortOrder); // Метод для сортировки в сторе
+    expenseStore.sortExpenses(column, sortOrder);
   };
 
   useEffect(() => {
@@ -45,15 +42,14 @@ const ExpenseList: React.FC = observer(() => {
   return (
     <div>
       <div>
-        <button onClick={() => handleTabChange(Tabs.Expenses)}>{Tabs.Expenses}</button>
-        <button onClick={() => handleTabChange(Tabs.Chart)}>{Tabs.Chart}</button>
+        <button className={styles.tabBtn} onClick={() => handleTabChange(Tabs.Expenses)}>{Tabs.Expenses}</button>
+        <button className={styles.tabBtn} onClick={() => handleTabChange(Tabs.Chart)}>{Tabs.Chart}</button>
       </div>
       <h2>{currentTab}</h2>
 
       {currentTab === Tabs.Chart && <PieChart />}
       {currentTab === Tabs.Expenses &&
       <>
-        <Filter />
         {expenseStore.filteredExpenses.length > 0 ? (
           <table className={styles.table}>
             <thead>

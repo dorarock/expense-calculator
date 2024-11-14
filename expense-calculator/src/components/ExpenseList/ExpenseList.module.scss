@@ -22,3 +22,13 @@
 .table th:hover {
  background-color: #e0e0e0;
 }
+
+.tabBtn {
+ padding: 10px 20px;
+ background-color: $accent-blue;
+ color: $card-background-color;
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 16px;
+}

@@ -20,7 +20,7 @@ export const createExpenseStore = () => {
     maxPrice: null as number | null,
     sortOrder: null as string | null,
 
-    addExpense(name, description: string, amount: number, category: string) {
+    addExpense(name: string, description: string, amount: number, category: Category) {
       const newExpense: Expense = {
         id: Date.now(),
         description,
@@ -50,7 +50,20 @@ export const createExpenseStore = () => {
     },
 
     get filteredExpenses() {
-      return this.expenses; // Фильтрация будет добавлена отдельно, если требуется
+      return this.expenses;
+    },
+
+    get expenseCategoryData() {
+      const categoryTotals: Record<string, number> = {};
+
+      this.expenses.forEach((expense) => {
+        if (!categoryTotals[expense.category]) {
+          categoryTotals[expense.category] = 0;
+        }
+        categoryTotals[expense.category] += expense.amount;
+      });
+
+      return categoryTotals;
     },
   });
 

@@ -1,5 +1,4 @@
 'use client'
-
 import {useState} from "react";
 import styles from "./page.module.scss";
 
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <div className={styles.layout}>
       <main className={styles.main}>
-        {/*<PieChart />*/}
         <div>
           <ExpenseList />
           <Modal isOpen={isModalOpen} onClose={closeModal}>
