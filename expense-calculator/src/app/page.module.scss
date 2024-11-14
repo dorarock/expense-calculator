@@ -36,21 +36,3 @@
    opacity: 0.9;
  }
 }
-
-.fixedButton {
- position: fixed;
- bottom: 20px;
- right: 20px;
- padding: 10px 20px;
- background-color: $accent-blue;
- color: $card-background-color;
- border: none;
- border-radius: 8px;
- cursor: pointer;
- font-size: 16px;
- z-index: 1001;
-}
-
-.fixedButton:hover {
- background-color: darken($accent-blue, 10%);
-}

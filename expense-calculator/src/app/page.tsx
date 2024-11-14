@@ -1,31 +1,27 @@
-'use client'
-import {useState} from "react";
 import styles from "./page.module.scss";
-
+import React from "react";
 import AddExpenseForm from "../components/AddExpenseForm/AddExpenseForm";
 import ExpenseList from "../components/ExpenseList/ExpenseList";
 import Modal from "../components/Modal/Modal";
+import AddExpenseBtn from "../components/AddExpenseBtn/AddExpenseBtn";
+
+enum Links {
+  Linkedin = "https://www.linkedin.com/in/daria-khudiakova-462126225/"
+}
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   return (
     <div className={styles.layout}>
       <main className={styles.main}>
-        <div>
-          <ExpenseList />
-          <Modal isOpen={isModalOpen} onClose={closeModal}>
-            <AddExpenseForm />
-          </Modal>
-        </div>
-        <button className={styles.fixedButton} onClick={openModal}>Add new</button>
+        <ExpenseList />
+        <Modal>
+          <AddExpenseForm />
+        </Modal>
+        <AddExpenseBtn />
       </main>
       <footer className={styles.footer}>
-        <a className={styles.link} href="/" target="_blank" rel="noreferrer">
-          Linkdin
+        <a className={styles.link} href={Links.Linkedin} target="_blank" rel="noreferrer">
+          My linkedin
         </a>
       </footer>
     </div>

@@ -9,16 +9,16 @@ import style from './AddExpenseForm.module.scss'
 type FormValues = {
   name: string;
   amount: number;
-  category: string;
-  date: string;
+  category: Category;
+  date: Date;
 };
 
 const AddExpenseForm: React.FC = observer(() => {
   const { register, handleSubmit, reset } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { name, description, amount, category } = data;
-    expenseStore.addExpense(name, description, Number(amount), category);
+    const { name, description, amount, category, date } = data;
+    expenseStore.addExpense(name, description, Number(amount), category, date.toISOString());
     reset();
   };
 

@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState }  from "react";
 import { observer } from "mobx-react-lite";
 import { expenseStore } from "../../stores/ExpenseStore";
 import { generateMockExpenses } from "../../stores/mockData";
@@ -34,9 +34,10 @@ const ExpenseList: React.FC = observer(() => {
     expenseStore.sortExpenses(column, sortOrder);
   };
 
-  useEffect(() => {
-    const mockExpenses = generateMockExpenses(10);
-    expenseStore.setExpenses(mockExpenses);
+  useEffect( () => {
+    generateMockExpenses(10).then((mockExpenses) =>
+      expenseStore.setExpenses(mockExpenses)
+    )
   }, []);
 
   return (

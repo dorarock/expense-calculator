@@ -8,6 +8,7 @@ export type Expense = {
   amount: number;
   category: Category;
   name: string;
+  date: string
 };
 
 export const createExpenseStore = () => {
@@ -19,24 +20,26 @@ export const createExpenseStore = () => {
     minPrice: null as number | null,
     maxPrice: null as number | null,
     sortOrder: null as string | null,
+    isModalOpen: false,
 
-    addExpense(name: string, description: string, amount: number, category: Category) {
+    addExpense(name: string, description: string, amount: number, category: Category, date: string) {
       const newExpense: Expense = {
         id: Date.now(),
         description,
         amount,
         category,
-        name
+        name,
+        date
       };
-      this.expenses.push(newExpense);
+      store.expenses.push(newExpense);
     },
 
     setExpenses(mockExpenses: Expense[]) {
-      this.expenses = mockExpenses;
+      store.expenses = mockExpenses;
     },
 
     sortExpenses(column: 'name' | 'amount' | 'category' | 'date', order: 'asc' | 'desc') {
-      this.expenses = this.expenses.slice().sort((a, b) => {
+      store.expenses = store.expenses.slice().sort((a, b) => {
         let comparison = 0;
         if (column === 'amount') {
           comparison = a.amount - b.amount;
@@ -49,14 +52,22 @@ export const createExpenseStore = () => {
       });
     },
 
+    openModal() {
+      store.isModalOpen = true;
+    },
+
+    closeModal() {
+      store.isModalOpen = false;
+    },
+
     get filteredExpenses() {
-      return this.expenses;
+      return store.expenses;
     },
 
     get expenseCategoryData() {
       const categoryTotals: Record<string, number> = {};
 
-      this.expenses.forEach((expense) => {
+      store.expenses.forEach((expense) => {
         if (!categoryTotals[expense.category]) {
           categoryTotals[expense.category] = 0;
         }
